@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>递归</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+	function factorial(n) {
+		if( n == 1 ) return n;
+		return n * factorial(n-1);
+	}
+
+	//节省空间调整
+	function factorial1(n, res) {
+		// res = res ? res : 1;
+		if(n == 1) return res;
+		return factorial1( n - 1, n * res);
+	}
+
+	//偏函数
+	function partial(fn) {
+		var args = Array.prototype.slice.call(arguments, 1);
+		console.log(args)
+		return function() {
+			var newArgs = [].slice.call(arguments).concat(args);
+			console.log(arguments)
+			console.log(fn)
+			// console.log([].slice.call(arguments))
+			return fn.apply(this, newArgs);
+		}
+	}
+
+	factorial = partial(factorial, 1);
+	console.log('asda: '+factorial)
+	// factorial = function() {
+	// 		var newArgs = [].slice.call(arguments).concat([5]);
+	// 		console.log(arguments)
+	// 		console.log([].slice.call(arguments))
+	// 		function fn (n) {
+	// 			if( n == 1 ) return n;
+	// 			return n * factorial(n-1);
+	// 		}
+	// 		return fn.apply(this, newArgs);
+	// 	}
+	console.log(factorial(5));
+
+	function feibonaqi(n) {
+		return n < 2 ? n : feibonaqi(n-1) + feibonaqi(n-2);
+	}
+
+
+</script>
